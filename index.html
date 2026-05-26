@@ -66,7 +66,7 @@
     .nav-links a.active { color: var(--green); font-weight: 600; }
 
     /* ─── HERO ─────────────────────────────────────── */
-    .hero {
+.hero {
       min-height: 100vh;
       padding: 120px 60px 80px;
       display: grid;
@@ -75,6 +75,8 @@
       align-items: start;
       max-width: 1200px;
       margin: 0 auto;
+      position: relative;
+      overflow: hidden;
     }
     .hero-left { padding-top: 40px; }
     .hero-eyebrow {
@@ -487,24 +489,210 @@
       .skills-grid { grid-template-columns: 1fr; }
       .edu-grid { grid-template-columns: 1fr; }
     }
+
+    /* ─── SCROLL PROGRESS BAR ──────────────────────── */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--yellow-dark), var(--yellow), var(--yellow-light));
+      z-index: 999;
+      width: 0%;
+      pointer-events: none;
+      box-shadow: 0 0 10px rgba(212,168,67,0.5);
+    }
+
+    /* ─── HERO PARTICLES ──────────────────────────── */
+    .hero-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+    .hero-particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0;
+      animation: particleFloat ease-in-out infinite;
+    }
+    @keyframes particleFloat {
+      0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.4; }
+      33% { transform: translateY(-25px) translateX(8px) scale(1.1); opacity: 0.7; }
+      66% { transform: translateY(-12px) translateX(-8px) scale(0.9); opacity: 0.5; }
+    }
+
+    /* ─── NAV ACTIVE LINK ──────────────────────────── */
+    .nav-links a.active {
+      color: var(--yellow-dark);
+      font-weight: 700;
+    }
+
+    /* ─── HERO STAGGER REVEAL ──────────────────────── */
+    .hero-eyebrow {
+      opacity: 0;
+      transform: translateY(-16px);
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    }
+    .hero.revealed .hero-eyebrow { opacity: 1; transform: translateY(0); }
+
+    .hero h1 {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease 0.1s, transform 0.7s cubic-bezier(0.16,1,0.3,1) 0.1s;
+    }
+    .hero.revealed h1 { opacity: 1; transform: translateY(0); }
+
+    .hero-role {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease 0.2s, transform 0.6s cubic-bezier(0.16,1,0.3,1) 0.2s;
+    }
+    .hero.revealed .hero-role { opacity: 1; transform: translateY(0); }
+
+    .hero-stats {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease 0.3s, transform 0.6s cubic-bezier(0.16,1,0.3,1) 0.3s;
+    }
+    .hero.revealed .hero-stats { opacity: 1; transform: translateY(0); }
+
+    .hero-bio {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease 0.4s, transform 0.6s cubic-bezier(0.16,1,0.3,1) 0.4s;
+    }
+    .hero.revealed .hero-bio { opacity: 1; transform: translateY(0); }
+
+    .hero-cta {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease 0.5s, transform 0.5s cubic-bezier(0.16,1,0.3,1) 0.5s;
+    }
+    .hero.revealed .hero-cta { opacity: 1; transform: translateY(0); }
+
+    .hero-right {
+      opacity: 0;
+      transform: translateX(40px) scale(0.95);
+      transition: opacity 0.8s ease 0.6s, transform 0.8s cubic-bezier(0.16,1,0.3,1) 0.6s;
+    }
+    .hero.revealed .hero-right { opacity: 1; transform: translateX(0) scale(1); }
+
+    /* ─── SECTION HEADING REVEAL ─────────────────── */
+    .reveal-heading .section-tag {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-heading.revealed .section-tag { opacity: 1; transform: translateY(0); }
+
+    .reveal-heading .section-title {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease 0.1s, transform 0.7s cubic-bezier(0.16,1,0.3,1) 0.1s;
+    }
+    .reveal-heading.revealed .section-title { opacity: 1; transform: translateY(0); }
+
+    .reveal-heading .section-sub {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease 0.2s, transform 0.6s cubic-bezier(0.16,1,0.3,1) 0.2s;
+    }
+    .reveal-heading.revealed .section-sub { opacity: 1; transform: translateY(0); }
+
+    /* ─── STAGGER GRID ────────────────────────────── */
+    .stagger-item {
+      opacity: 0;
+      transform: translateY(36px) scale(0.96);
+      transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+    .stagger-item.revealed { opacity: 1; transform: translateY(0) scale(1); }
+
+    .skill-card {
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .skill-card:hover {
+      border-color: var(--yellow) !important;
+      box-shadow: 0 12px 32px rgba(180,140,60,0.18) !important;
+      transform: translateY(-5px) scale(1.02) !important;
+    }
+    .skill-icon { transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); }
+    .skill-card:hover .skill-icon { transform: scale(1.15) rotate(-5deg); }
+
+    /* ─── TIMELINE STAGGER ───────────────────────── */
+    .timeline-item {
+      opacity: 0;
+      transform: translateX(-28px);
+      transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+    .timeline-item.revealed { opacity: 1; transform: translateX(0); }
+    .timeline-item:nth-child(2).revealed { transition-delay: 0.1s; }
+    .timeline-item:nth-child(3).revealed { transition-delay: 0.2s; }
+    .timeline-item:nth-child(4).revealed { transition-delay: 0.3s; }
+
+    /* ─── EDU CARD STAGGER ───────────────────────── */
+    .edu-card {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s, border-color 0.3s;
+    }
+    .edu-card.revealed { opacity: 1; transform: translateY(0); }
+    .edu-card:nth-child(2).revealed { transition-delay: 0.12s; }
+    .edu-card:nth-child(3).revealed { transition-delay: 0.24s; }
+    .edu-card:hover {
+      border-color: var(--yellow) !important;
+      box-shadow: 0 12px 30px rgba(180,140,60,0.15);
+      transform: translateY(-4px);
+    }
+
+    /* ─── INFO CARD STAGGER ──────────────────────── */
+    .info-card {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s, border-color 0.3s;
+    }
+    .info-card.revealed { opacity: 1; transform: translateY(0); }
+    .info-card:nth-child(2).revealed { transition-delay: 0.15s; }
+    .info-card:hover {
+      border-color: var(--yellow) !important;
+      box-shadow: 0 10px 28px rgba(180,140,60,0.14);
+    }
+
+    /* ─── CONTACT CARD STAGGER ───────────────────── */
+    .contact-inner {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .contact-inner.revealed { opacity: 1; transform: translateY(0); }
+
+    /* ─── ANIMATED STAT COUNTER ─────────────────── */
+    .stat-value { font-family: 'Fraunces', serif; font-size: 30px; font-weight: 700; color: var(--text); }
+    .stat-value.counting { transition: color 0.3s; }
   </style>
 </head>
 <body>
+
+  <!-- SCROLL PROGRESS BAR -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- HERO PARTICLES -->
+  <div class="hero-particles" id="heroParticles"></div>
 
   <!-- NAV -->
   <nav>
     <div class="nav-logo">Vong Rady.</div>
     <ul class="nav-links">
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#info">About</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#skills" data-section="skills">Skills</a></li>
+      <li><a href="#experience" data-section="experience">Experience</a></li>
+      <li><a href="#education" data-section="education">Education</a></li>
+      <li><a href="#info" data-section="info">About</a></li>
+      <li><a href="#contact" data-section="contact">Contact</a></li>
     </ul>
   </nav>
 
   <!-- HERO -->
-  <div class="hero">
+  <div class="hero" id="hero">
     <div class="hero-left">
       <div class="hero-eyebrow">IT Officer · Web Developer</div>
       <h1>Vong Vorn Rady<span class="khmer-name">វង្ស វរ័្ធន រត្នសោតី</span></h1>
@@ -514,15 +702,15 @@
       </p>
       <div class="hero-stats">
         <div>
-          <div class="stat-value">5+</div>
+          <div class="stat-value" data-target="5" data-suffix="+">0</div>
           <div class="stat-label">Years Experience</div>
         </div>
         <div>
-          <div class="stat-value">3</div>
+          <div class="stat-value" data-target="3">0</div>
           <div class="stat-label">Organizations</div>
         </div>
         <div>
-          <div class="stat-value">K-3-4</div>
+          <div class="stat-value" data-target="0" data-display="K-3-4">K-3-4</div>
           <div class="stat-label">Civil Service Grade</div>
         </div>
       </div>
@@ -549,13 +737,13 @@
 
   <!-- SKILLS -->
   <section id="skills">
-    <div class="section-header">
+    <div class="section-header reveal-heading" id="skillsHeading">
       <div class="section-tag">Technical Skills</div>
       <h2 class="section-title">What I build with</h2>
       <p class="section-sub">From backend APIs to mobile apps, spanning the full software development lifecycle.</p>
     </div>
-    <div class="skills-grid">
-      <div class="skill-card">
+    <div class="skills-grid stagger-grid" id="skillsGrid">
+      <div class="stagger-item skill-card">
         <div class="skill-icon">☕</div>
         <h3>Java Spring Boot</h3>
         <p>Enterprise-grade backend services, Spring Security, JPA/Hibernate, REST API design, and microservices.</p>
@@ -565,7 +753,7 @@
           <span class="skill-tag">REST</span>
         </div>
       </div>
-      <div class="skill-card">
+      <div class="stagger-item skill-card">
         <div class="skill-icon">📐</div>
         <h3>TypeScript / Node.js</h3>
         <p>Full-stack web development with TypeScript, modern frontend frameworks, and scalable Node.js backends.</p>
@@ -575,7 +763,7 @@
           <span class="skill-tag">React</span>
         </div>
       </div>
-      <div class="skill-card">
+      <div class="stagger-item skill-card">
         <div class="skill-icon">📱</div>
         <h3>Android Development</h3>
         <p>Native Android application development with modern architecture patterns and best practices.</p>
@@ -585,7 +773,7 @@
           <span class="skill-tag">MVVM</span>
         </div>
       </div>
-      <div class="skill-card">
+      <div class="stagger-item skill-card">
         <div class="skill-icon">🗄️</div>
         <h3>Database Design</h3>
         <p>Relational database architecture, schema design, query optimization for enterprise systems.</p>
@@ -595,7 +783,7 @@
           <span class="skill-tag">ERD</span>
         </div>
       </div>
-      <div class="skill-card">
+      <div class="stagger-item skill-card">
         <div class="skill-icon">🏗️</div>
         <h3>Clean Architecture & DDD</h3>
         <p>Domain-Driven Design, Clean Architecture principles, UML modeling with Mermaid.js.</p>
@@ -605,7 +793,7 @@
           <span class="skill-tag">Clean Arch</span>
         </div>
       </div>
-      <div class="skill-card">
+      <div class="stagger-item skill-card">
         <div class="skill-icon">🔒</div>
         <h3>Security & OWASP</h3>
         <p>Secure coding practices, OWASP Top 10 mitigation, authentication/authorization systems.</p>
@@ -620,12 +808,12 @@
 
   <!-- EXPERIENCE -->
   <section id="experience">
-    <div class="section-header">
+    <div class="section-header reveal-heading" id="experienceHeading">
       <div class="section-tag">Career Path</div>
       <h2 class="section-title">Work Experience</h2>
       <p class="section-sub">From private sector fintech to government digital transformation.</p>
     </div>
-    <div class="timeline">
+    <div class="timeline" id="timeline">
       <div class="timeline-item">
         <div class="timeline-date">Mar 2022 — Present</div>
         <h3>IT Officer · Web Developer</h3>
@@ -655,11 +843,11 @@
 
   <!-- EDUCATION -->
   <section id="education">
-    <div class="section-header">
+    <div class="section-header reveal-heading" id="educationHeading">
       <div class="section-tag">Background</div>
       <h2 class="section-title">Education</h2>
     </div>
-    <div class="edu-grid">
+    <div class="edu-grid" id="eduGrid">
       <div class="edu-card">
         <div class="year">2016 — 2018</div>
         <h3>Associate Degree in IT</h3>
@@ -680,71 +868,42 @@
 
   <!-- INFO -->
   <section id="info">
-    <div class="section-header">
+    <div class="section-header reveal-heading" id="infoHeading">
       <div class="section-tag">Profile</div>
       <h2 class="section-title">About Me</h2>
     </div>
-    <div class="info-grid">
+    <div class="info-grid" id="infoGrid">
       <div class="info-card">
         <h3>Personal Details</h3>
-        <div class="info-row">
-          <span class="label">Full Name (Khmer)</span>
-          <span class="value">វង្ស វរ័្ធន រត្នសោតី</span>
-        </div>
-        <div class="info-row">
-          <span class="label">Full Name (Latin)</span>
-          <span class="value">Vong Vorn Rady</span>
-        </div>
-        <div class="info-row">
-          <span class="label">Date of Birth</span>
-          <span class="value">November 11, 1996</span>
-        </div>
-        <div class="info-row">
-          <span class="label">Nationality</span>
-          <span class="value">Cambodian</span>
-        </div>
-        <div class="info-row">
-          <span class="label">Badge ID</span>
-          <span class="value">8844</span>
-        </div>
+        <div class="info-row"><span class="label">Full Name (Khmer)</span><span class="value">វង្ស វរ័្ធន រត្នសោតី</span></div>
+        <div class="info-row"><span class="label">Full Name (Latin)</span><span class="value">Vong Vorn Rady</span></div>
+        <div class="info-row"><span class="label">Date of Birth</span><span class="value">November 11, 1996</span></div>
+        <div class="info-row"><span class="label">Nationality</span><span class="value">Cambodian</span></div>
+        <div class="info-row"><span class="label">Badge ID</span><span class="value">8844</span></div>
       </div>
       <div class="info-card">
         <h3>Contact</h3>
-        <div class="info-row">
-          <span class="label">Email</span>
-          <span class="value">vornraingseyvong@gmail.com</span>
-        </div>
-        <div class="info-row">
-          <span class="label">Phone</span>
-          <span class="value">093 937 400</span>
-        </div>
-        <div class="info-row">
-          <span class="label">Address</span>
-          <span class="value">House 91I, Street 102, Svay Pak, Phnom Penh</span>
-        </div>
-        <div class="info-row">
-          <span class="label">National ID</span>
-          <span class="value">061 346 788</span>
-        </div>
+        <div class="info-row"><span class="label">Email</span><span class="value">vornraingseyvong@gmail.com</span></div>
+        <div class="info-row"><span class="label">Phone</span><span class="value">093 937 400</span></div>
+        <div class="info-row"><span class="label">Address</span><span class="value">House 91I, Street 102, Svay Pak, Phnom Penh</span></div>
+        <div class="info-row"><span class="label">National ID</span><span class="value">061 346 788</span></div>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
   <section id="contact">
-    <div class="contact-inner">
+    <div class="contact-inner" id="contactInner">
       <div>
         <h2>Let's connect</h2>
         <p>Open to discussing technology projects, government digital initiatives, or career conversations. The best way to reach me is via email.</p>
       </div>
       <div class="contact-actions">
         <a href="mailto:vornraingseyvong@gmail.com" class="contact-link">
-          <span class="link-icon">✉️</span>
-          <span>vornraingseyvong@gmail.com</span>
+          <span class="link-icon">✉️</span><span>vornraingseyvong@gmail.com</span>
         </a>
-        <a href="tel:+85593937400" class="contact-link">
-          <span class="link-icon">📞</span>
-          <span>+855 93 937 400</span>
+        <a href="tel:+855937400" class="contact-link">
+          <span class="link-icon">📞</span><span>+855 93 937 400</span>
         </a>
       </div>
     </div>
@@ -757,22 +916,123 @@
   </footer>
 
   <script>
-    document.querySelectorAll('.nav-links a').forEach(a => {
+    // ─── SCROLL PROGRESS BAR ───
+    const scrollProgress = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      scrollProgress.style.width = ((scrollTop / docHeight) * 100) + '%';
+    });
+
+    // ─── HERO PARTICLES ───
+    const particlesContainer = document.getElementById('heroParticles');
+    const particleColors = ['rgba(212,168,67,0.6)', 'rgba(212,168,67,0.4)', 'rgba(61,107,79,0.5)', 'rgba(240,228,200,0.5)'];
+    for (let i = 0; i < 16; i++) {
+      const p = document.createElement('div');
+      p.className = 'hero-particle';
+      const size = Math.random() * 5 + 2;
+      p.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;background:${particleColors[Math.floor(Math.random()*particleColors.length)]};animation-duration:${Math.random()*6+4}s;animation-delay:${Math.random()*3}s;`;
+      particlesContainer.appendChild(p);
+    }
+
+    // ─── INTERSECTION OBSERVER ───
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('revealed');
+      });
+    }, { threshold: 0.08 });
+
+    // Hero reveal on load
+    window.addEventListener('load', () => {
+      setTimeout(() => document.getElementById('hero').classList.add('revealed'), 100);
+    });
+
+    // Section headings
+    document.querySelectorAll('.reveal-heading').forEach(el => revealObserver.observe(el));
+
+    // Contact section
+    revealObserver.observe(document.getElementById('contactInner'));
+
+    // Stagger grid items
+    const staggerObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const siblings = Array.from(el.parentElement.querySelectorAll('.stagger-item'));
+          const i = siblings.indexOf(el);
+          setTimeout(() => el.classList.add('revealed'), i * 80);
+        }
+      });
+    }, { threshold: 0.05 });
+
+    document.querySelectorAll('.stagger-item').forEach(el => staggerObserver.observe(el));
+
+    // Timeline items
+    document.querySelectorAll('.timeline-item').forEach(el => revealObserver.observe(el));
+
+    // Edu cards
+    document.querySelectorAll('.edu-card').forEach((el, i) => {
+      const obs = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+          setTimeout(() => el.classList.add('revealed'), i * 120);
+        }
+      }, { threshold: 0.1 });
+      obs.observe(el);
+    });
+
+    // Info cards
+    document.querySelectorAll('.info-card').forEach((el, i) => {
+      const obs = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+          setTimeout(() => el.classList.add('revealed'), i * 150);
+        }
+      }, { threshold: 0.1 });
+      obs.observe(el);
+    });
+
+    // ─── STAT COUNTERS ───
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target);
+          const suffix = el.dataset.suffix || '';
+          if (target === 0) { el.textContent = el.dataset.display || '0'; counterObserver.unobserve(el); return; }
+          let current = 0;
+          const timer = setInterval(() => {
+            current += target / 40;
+            if (current >= target) { current = target; clearInterval(timer); }
+            el.textContent = Math.floor(current) + suffix;
+          }, 40);
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.stat-value[data-target]').forEach(el => counterObserver.observe(el));
+
+    // ─── NAV ACTIVE SECTION ───
+    const navLinks = document.querySelectorAll('.nav-links a[data-section]');
+    const sections = document.querySelectorAll('section[id]');
+
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.dataset.section === entry.target.id);
+          });
+        }
+      });
+    }, { threshold: 0.4 });
+
+    sections.forEach(sec => navObserver.observe(sec));
+
+    // ─── SMOOTH SCROLL ───
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
         e.preventDefault();
         const target = document.querySelector(a.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-
-    const sections = document.querySelectorAll('section[id]');
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(s => {
-        if (s.getBoundingClientRect().top <= 120) current = s.id;
-      });
-      document.querySelectorAll('.nav-links a').forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
   </script>
